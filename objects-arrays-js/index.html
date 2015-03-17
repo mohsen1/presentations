@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Working with `Array`s and `Object`s in modern JavaScript</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+<textarea id="source">
+
+
+class: center, middle
+
+# Working with `Array`s and `Object`s in modern JavaScript
+
+---
+
+# About Me
+
+<img width="100px" src="https://avatars2.githubusercontent.com/u/543633?v=3&s=460">
+### Mohsen Azimi
+#### Software Engineer @Apigee
+
+* Github: [`@mohsen1`](https://github.com/mohsen1)
+* Twitter: [`@mohsen____`](https://twitter.com/mohsen____)
+* Website: [`azimi.me`](http://azimi.me)
+
+---
+
+# `Array`
+### ES5
+  * `Array.isArray`
+  * `Array.prototype.map`
+  * `Array.prototype.reduce`
+  * `Array.prototype.filter`
+  * `Array.prototype.every`
+  * `Array.prototype.some`
+
+### ES6
+  * `Array.of`
+  * `Array.from`
+  * `Array.prototype.includes`
+  * `Array.prototype.find`
+  * `Array.prototype.entries`
+  * `Array.prototype.keys`
+  * `Array.prototype.from`
+
+---
+
+# `Array.isArray`
+
+* Class function that checks if an object is array.
+
+
+
+
+---
+
+
+# `Array.isArray`
+
+### Polyfill ✔
+  ```
+  if (!Array.isArray) {
+      Array.isArray = function(arg) {
+          return Object.prototype.toString.call(arg) === '[object Array]';
+      };
+  }
+  ```
+### Browsers
+  * IE9+
+  * Safari 5
+
+---
+# `Array.prototype.map`
+
+> The map() method creates a new array with the results of calling a provided function on every element in this array.
+
+```
+  var sizes = [
+    {width: 10, height: 20},
+    {width: 4,  height: 15},
+    {width: 30, height: 20}
+  ];
+
+```
+---
+
+# `Array.prototype.map`
+### Polyfill ✔
+
+  [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Polyfill)
+### Browsers
+  * IE9+
+
+
+---
+# `Array.prototype.reduce`
+
+> The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) has to reduce it to a single value.
+
+```
+  var sizes = [
+    {width: 10, height: 20},
+    {width: 4,  height: 15},
+    {width: 30, height: 20}
+  ];
+```
+
+---
+# `Array.prototype.reduce`
+### Polyfill ✔
+  [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#Polyfill)
+
+### Browsers
+  * IE9+
+
+
+---
+# NAME
+
+>
+
+```
+```
+
+---
+# NAME
+### Polyfill ✔
+
+
+### Browsers
+  * IE9+
+
+
+---
+# NAME
+
+>
+
+```
+```
+
+---
+# NAME
+### Polyfill ✔
+
+
+### Browsers
+  * IE9+
+
+
+---
+# NAME
+
+>
+
+```
+```
+
+---
+# NAME
+### Polyfill ✔
+
+
+### Browsers
+  * IE9+
+
+
+
+
+#`Object`
+### ES5
+* `Object.create`
+* `Object.defineProperties`
+* `Object.defineProperty`
+* `Object.keys`
+* `Object.preventExtensions`
+* `Object.prototype.propertyIsEnumerable`
+* `Object.seal` and `Object.freeze`
+
+### ES6
+* `Object.is`
+* `Object.assign`
+* `Object.observe`
+
+---
+
+#`Object.create`
+
+  * Used for creating objects with an existing prototype
+  * setter/getter
+  * Can create object with no prototype
+
+---
+
+#TODO
+Explain all new object methods listed previously
+
+---
+
+#Bonus: `Map` and `Set`
+
+  A quick introduction to `Map` and `Set`
+
+---
+
+# If there was time: `Proxy`
+
+`Proxy`
+
+</textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
