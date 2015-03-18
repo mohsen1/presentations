@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <title>Working with `Array`s and `Object`s in modern JavaScript</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
@@ -16,6 +15,7 @@
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
     </style>
+    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
   </head>
   <body>
 <textarea id="source">
@@ -61,18 +61,28 @@ class: center, middle
 
 # `Array.isArray`
 
-* Class function that checks if an object is array.
+> The `Array.isArray()` method returns true if an object is an array, false if it is not.
+
+```js
+Array.isArray([]) // true
+Array.isArray({length: 100}) // false
+```
+
+```js
+function Foo(){};
+Foo.prototype = new Array();
+var f = new Foo();
+f.push('a');
 
 
-
-
+Array.isArray(f); // false
+```
 ---
-
 
 # `Array.isArray`
 
-### Polyfill ✔
-  ```
+### Polyfill <span style="color: green">✔</span>
+  ```js
   if (!Array.isArray) {
       Array.isArray = function(arg) {
           return Object.prototype.toString.call(arg) === '[object Array]';
@@ -86,20 +96,56 @@ class: center, middle
 ---
 # `Array.prototype.map`
 
-> The map() method creates a new array with the results of calling a provided function on every element in this array.
+> The `map()` method creates a new array with the results of calling a provided function on every element in this array.
 
-```
+```js
   var sizes = [
     {width: 10, height: 20},
     {width: 4,  height: 15},
     {width: 30, height: 20}
   ];
 
+  var areas = sizes.map(function (item) {
+    return item.width * item.height;
+  });
+
+  // areas => [200, 60, 600]
+
+```
+---
+# `Array.prototype.map`
+```js
+var rows = [
+    document.querySelector('.row-0'),
+    document.querySelector('.row-1'),
+    document.querySelector('.row-2'),
+    document.querySelector('.row-3'),
+    document.querySelector('.row-4'),
+    document.querySelector('.row-5')
+];
+
+var highlightedRows = rows.map(function (row, index) {
+
+    if (index % 2 === 0) {
+        row.classList.add('even');
+    }
+
+    return row;
+});
+```
+
+```html
+<div class="row-0"></div>
+<div class="row-1"></div>
+<div class="row-2 even"></div>
+<div class="row-3"></div>
+<div class="row-4 even"></div>
+<div class="row-5"></div>
 ```
 ---
 
 # `Array.prototype.map`
-### Polyfill ✔
+### Polyfill <span style="color: green">✔</span>
 
   [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Polyfill)
 ### Browsers
@@ -109,76 +155,210 @@ class: center, middle
 ---
 # `Array.prototype.reduce`
 
-> The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) has to reduce it to a single value.
+> The `reduce()` method applies a function against an accumulator and each value of the array (from left-to-right) has to reduce it to a single value.
 
-```
+```js
   var sizes = [
     {width: 10, height: 20},
     {width: 4,  height: 15},
-    {width: 30, height: 20}
+    {width: 30, height: 20},
+    {width: 9,  height: 15}
   ];
-```
 
+  var totalArea = sizes
+
+    .map(function (item) {
+      return item.width * item.height;
+    })
+
+    .reduce(function (memory, item) {
+      return memory + item;
+    }, 0);
+
+  // totalArea => 995
+```
 ---
 # `Array.prototype.reduce`
-### Polyfill ✔
+
+```js
+var people = [
+    {name: 'Mike', age: 21},
+    {name: 'Tracy', age: 23},
+    {name: 'Noah', age: 29}
+];
+
+var namesAndAges = people.reduce(function (soFar, person) {
+    soFar[person.name] = person.age;
+
+    return soFar;
+}, {});
+```
+
+```js
+namesAndAges // =>
+
+{
+  Mike: 21,
+  Tracy: 23,
+  Noah: 29
+}
+```
+---
+# `Array.prototype.reduce`
+### Polyfill <span style="color: green">✔</span>
   [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#Polyfill)
 
 ### Browsers
   * IE9+
 
-
 ---
-# NAME
+# `Array.prototype.filter`
 
->
+> The `filter()` method creates a new array with all elements that pass the test implemented by the provided function.
+
+```js
+var students = [
+    {name: 'Noah',  score: 2.1},
+    {name: 'Liam',  score: 3.2},
+    {name: 'Jacob', score: 1.8},
+    {name: 'Mason', score: 3.4},
+    {name: 'Ella',  score: 3.9}
+];
+
+var passed = students.filter(function (student) {
+   return student.score >= 3;
+});
+```
+
+```js
+[
+    {name: 'Liam',  score: 3.2},
+    {name: 'Mason', score: 3.4},
+    {name: 'Ella',  score: 3.9}
+]
 
 ```
-```
 
 ---
-# NAME
-### Polyfill ✔
+# `Array.prototype.filter`
 
+```js
+['0', 0, 1, 2, undefined, 3, null, 4, null, 5].filter(Number);
+
+// => [1, 2, 3, 4, 5]
+```
+
+```js
+['/login', 'http://www.example.com'].map(encodeURIComponent)
+
+// => ["%2Flogin", "http%3A%2F%2Fwww.example.com"]
+```
+
+```js
+[
+    [1],
+    [2],
+    3,
+    [4]
+]
+.filter(Array.isArray)
+
+// => [ [1], [2], [4]]
+```
+---
+# `Array.prototype.filter`
+### Polyfill<span style="color: green">✔</span>
+
+[`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Polyfill)
 
 ### Browsers
   * IE9+
 
 
 ---
-# NAME
+# `Array.prototype.every`
 
->
+> The `every()` method tests whether all elements in the array pass the test implemented by the provided function.
 
+```js
+var checkboxes = [
+    document.querySelector('.checkbox-1'),
+    document.querySelector('.checkbox-2'),
+    document.querySelector('.checkbox-3'),
+    document.querySelector('.checkbox-4')
+];
+
+var isAllChecked = checkboxes.every(function (checkbox) {
+    return checkbox.checked;
+});
 ```
+
+[JSBin](http://jsbin.com/joxeze/1/edit?html,js,output)
+
+---
+# `Array.prototype.every`
+
+```js
+if ([file1, file2, file2].every(fs.existsSync)) {
+    // do things
+}
 ```
 
 ---
-# NAME
-### Polyfill ✔
+# `Array.prototype.every`
+### Polyfill<span style="color: green">✔</span>
 
+[`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every#Polyfill)
 
 ### Browsers
   * IE9+
 
 
 ---
-# NAME
+# `Array.prototype.some`
 
->
+> The `some()` method tests whether some element in the array passes the test implemented by the provided function.
 
+```js
+var classes = [
+    {name: 'Physics', score: 85},
+    {name: 'Math',    score: 73},
+    {name: 'History', score: 58}
+];
+
+var failed = classes.some(function (item) {
+    return item.score < 60;
+});
 ```
-```
+
+[JSBin](http://jsbin.com/yobuxo/1/edit?html,js,output)
 
 ---
-# NAME
-### Polyfill ✔
+
+#`Array.prototype.some`
+
+```js
+var inputs = [
+    document.querySelector('.field-1'),
+    document.querySelector('.field-2'),
+    document.querySelector('.field-3')
+];
+
+var hasEmptyField = inputs.some(function (input) {
+    return input.value === '';
+});
+```
+---
+
+#`Array.prototype.some`
+### Polyfill<span style="color: green">✔</span>
+[`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Polyfill)
 
 
 ### Browsers
   * IE9+
 
-
+---
 
 
 #`Object`
