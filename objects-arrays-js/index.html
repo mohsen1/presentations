@@ -402,6 +402,22 @@ function addAll() {
 }
 ```
 
+```js
+function doMath(operator, ...rest) {
+
+  return Array.from(rest).reduce((mem, item) => {
+
+    switch (operator) {
+      case '+': return mem + item; break;
+      case '-': return mem - item; break;
+      default: return undefined;
+    }
+  }, 0)
+
+}
+
+```
+
 ---
 
 #`Array.from`
@@ -476,8 +492,23 @@ myElement.addEventListener('click', event => {
 })
 ```
 ---
+#`Array.from`
 
-#`Array.prototype.from`
+### Using with iterators
+
+```js
+function* gen(){
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+
+Array.from(gen()); // => [1, 2, 3]
+```
+---
+
+#`Array.from`
 ### Polyfill<span style="color: green">✔</span>
 [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill)
 
@@ -486,76 +517,93 @@ myElement.addEventListener('click', event => {
 
 ---
 
-#`Array.prototype.NAME`
-### Polyfill<span style="color: green">✔</span>
+#`Array.prototype.find`
 
-
-### Browsers
-  *
-
----
-#`Array.prototype.NAME`
+> The `find()` method returns a value in the array, if an element in the array satisfies the provided testing function. Otherwise `undefined` is returned.
 
 ```js
+const students = [
+    {name: 'Noah',  score: 2.1},
+    {name: 'Liam',  score: 3.2},
+    {name: 'Jacob', score: 1.8},
+    {name: 'Mason', score: 3.4},
+    {name: 'Ella',  score: 1.9}
+];
 
+const weakStudent = students.find(student => student.score < 2);
+
+// => {name: 'Jacob', score: 1.8}
 ```
 ---
 
-#`Array.prototype.NAME`
+#`Array.prototype.find`
+
 ### Polyfill<span style="color: green">✔</span>
 
+[`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find#Polyfill)
 
 ### Browsers
-  *
+  * Firefox 25
 
 ---
 
-#`Array.prototype.NAME`
-### Polyfill<span style="color: green">✔</span>
+#`Array.prototype.entries`
 
-
-### Browsers
-  *
-
----
-#`Array.prototype.NAME`
+> The `entries()` method returns a new Array Iterator object that contains the key/value pairs for each index in the array.
 
 ```js
+const arr = [1, 2, 3];
 
+const arrIterator = arr.entries();
+
+let nextVal
+
+while (nextVal = arrIterator.next().value) {
+ console.log(nextVal);
+}
+
+```
+
+```js
+[0, 1]
+[1, 2]
+[2, 3]
+```
+
+---
+#`Array.prototype.entries`
+
+```js
+const arr = ['a', 'b', 'c'];
+
+for (let item of arr) {
+    console.log(item); // => 'a' 'b' 'c'
+}
+
+for (let pair of arr.entries()) {
+    console.log(pair); // => [0, 'a'] [1, 'b'] [2, 'c']
+}
+```
+
+
+```js
+for (let pair of theArray) {
+
+    if (pair[0] % 197 === 0) {
+
+        console.log(pair[1]);
+    }
+}
 ```
 ---
 
-#`Array.prototype.NAME`
+#`Array.prototype.entries`
 ### Polyfill<span style="color: green">✔</span>
 
 
 ### Browsers
-  *
-
----
-
-#`Array.prototype.NAME`
-### Polyfill<span style="color: green">✔</span>
-
-
-### Browsers
-  *
-
----
-#`Array.prototype.NAME`
-
-```js
-
-```
----
-
-#`Array.prototype.NAME`
-### Polyfill<span style="color: green">✔</span>
-
-
-### Browsers
-  *
-
+  * Firefox 28
+  * Chrome 38
 
 ---
 
