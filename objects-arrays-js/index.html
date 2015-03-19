@@ -264,7 +264,7 @@ var passed = students.filter(function (student) {
 ```
 ---
 # `Array.prototype.filter`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 
 [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Polyfill)
 
@@ -303,7 +303,7 @@ if ([file1, file2, file2].every(fs.existsSync)) {
 
 ---
 # `Array.prototype.every`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 
 [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every#Polyfill)
 
@@ -348,7 +348,7 @@ var hasEmptyField = inputs.some(function (input) {
 ---
 
 #`Array.prototype.some`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Polyfill)
 
 
@@ -374,7 +374,7 @@ Array.of(1,2,3); // => [1,2,3]
 ---
 
 #`Array.of`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 
 ```js
 if (!Array.of) {
@@ -507,7 +507,7 @@ Array.from(gen()); // => [1, 2, 3]
 ---
 
 #`Array.from`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill)
 
 ### Browsers
@@ -536,7 +536,7 @@ const weakStudent = students.find(student => student.score < 2);
 
 #`Array.prototype.find`
 
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 
 [`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find#Polyfill)
 
@@ -596,7 +596,7 @@ for (let pair of theArray.entries()) {
 ---
 
 #`Array.prototype.entries`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 
 
 ### Browsers
@@ -629,7 +629,7 @@ while (nextVal = arrIterator.next().value) {
 ---
 
 #`Array.prototype.keys`
-### Polyfill<span style="color: green">✔</span>
+### Polyfill <span style="color: green">✔</span>
 
 
 ### Browsers
@@ -641,8 +641,7 @@ while (nextVal = arrIterator.next().value) {
 #`Object`
 ### ES5
 * `Object.create`
-* `Object.defineProperties`
-* `Object.defineProperty`
+* `Object.defineProperty` and `Object.defineProperties`
 * `Object.keys`
 * `Object.preventExtensions`
 * `Object.prototype.propertyIsEnumerable`
@@ -657,26 +656,159 @@ while (nextVal = arrIterator.next().value) {
 
 #`Object.create`
 
-  * Used for creating objects with an existing prototype
-  * setter/getter
-  * Can create object with no prototype
+> The Object.create() method creates a new object with the specified prototype object and properties.
+
+```js
+var empty = Object.create(null);
+
+empty.toString // => undefined
+```
+
+```js
+var o = Object.create(Object, {
+  p: {
+    value: 42,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
+});
+```
 
 ---
 
-#TODO
-Explain all new object methods listed previously
+#`Object.create`
+### Polyfill <span style="color: green">✔</span>
+
+```js
+  Object.create = (function() {
+    var Temp = function() {};
+    return function (prototype) {
+      if (arguments.length > 1) {
+        throw Error('Second argument not supported');
+      }
+      if (typeof prototype != 'object') {
+        throw TypeError('Argument must be an object');
+      }
+      Temp.prototype = prototype;
+      var result = new Temp();
+      Temp.prototype = null;
+      return result;
+    };
+  })();
+```
+### Browsers
+  * IE9+
+---
+
+# `Object.defineProperty` and `Object.defineProperties`
+
+> The `Object.defineProperties()` method defines new or modifies existing properties directly on an object, returning the object.
+
+> The `Object.defineProperty()` method defines a new property directly on an object, or modifies an existing property on an object, and returns the object.
+
+---
+# `Object.defineProperty` and `Object.defineProperties`
+
+### `writable`
+
+```js
+var o = {};
+
+Object.defineProperty(o, 'a', {
+  value: 37,
+  writable: false
+});
+
+o.a = 11
+o.a // => 37
+
+delete o.a
+o.a // => 37
+
+```
+---
+# `Object.defineProperty` and `Object.defineProperties`
+
+### `writable`
+
+```js
+Object.defineProperty(o, 'a', {value: 1000});
+// => TypeError: Cannot redefine property: a
+
+Object.defineProperty(o, 'a', {configurable: true});
+// => TypeError: Cannot redefine property: a
+
+Object.defineProperty(o, 'a', {configurable: false});
+// no issues. you can make non-writable properties non-configurable
+```
+---
+# `Object.defineProperty` and `Object.defineProperties`
+
+### `enumerable`
+
+```js
+var o = Object.create(HTMLElement);
+Object.defineProperties(o, {
+    a: {value: 100, enumerable: false},
+    b: {value: 200, enumerable: true },
+    c: {value: 300, enumerable: true }
+});
+
+Object.keys(o); //=>  ['b', 'c']
+
+for (var key in o) {
+    console.log(key); // => 'b' 'c' 'toString' ... All HTMLElement enumerable properties
+}
+
+```
 
 ---
 
-#Bonus: `Map` and `Set`
+# `Object.defineProperty` and `Object.defineProperties`
 
-  A quick introduction to `Map` and `Set`
+### `configurable`
 
+```js
+var o = {};
+Object.defineProperty(o, 'a', {
+  value: 100,
+  configurable: false
+});
+
+Object.defineProperty(o, 'a', {/* any configuration */}); // => throws error
+```
+---
+# `Object.defineProperty` and `Object.defineProperties`
+
+### `configurable`
+
+```js
+var o = {};
+var val;
+Object.defineProperty(o, 'a', {
+  get: function() { return val; },
+  set: function(v) { val = v; }
+  configurable: false
+});
+
+o.a = 10; // o.a => 10
+```
+
+```js
+var o = {};
+var val;
+Object.defineProperty(o, 'a', {
+  get: function() { return val; },
+  set: function(v) { val = v; },
+  writable: false
+});
+
+// => TypeError: Invalid property.  A property cannot both have accessors and be writable or have a value
+```
 ---
 
-# If there was time: `Proxy`
 
-`Proxy`
 
 </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
