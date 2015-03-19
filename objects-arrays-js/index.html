@@ -51,7 +51,6 @@ class: center, middle
 ### ES6
   * `Array.of`
   * `Array.from`
-  * `Array.prototype.includes`
   * `Array.prototype.find`
   * `Array.prototype.entries`
   * `Array.prototype.keys`
@@ -359,7 +358,206 @@ var hasEmptyField = inputs.some(function (input) {
   * IE9+
 
 ---
+class: center, middle
 
+# New `Array` methods in ES6
+
+---
+#`Array.of`
+
+> The `Array.of()` method creates a new Array instance with a variable number of arguments, regardless of number or type of the arguments.
+
+```js
+Array.of(1); // => [1]
+
+Array.of(1,2,3); // => [1,2,3]
+```
+
+---
+
+#`Array.of`
+### Polyfill<span style="color: green">✔</span>
+
+```js
+if (!Array.of) {
+  Array.of = function() {
+    return Array.prototype.slice.call(arguments);
+  };
+}
+
+```
+
+### Browsers
+  * Chrome 39+
+  * Firefox 25+
+
+---
+
+#`Array.from`
+> The `Array.from()` method creates a new Array instance from an array-like or iterable object.
+
+```js
+function addAll() {
+    return Array.from(arguments).reduce((m, i) =>  m + i , 0);
+}
+```
+
+---
+
+#`Array.from`
+
+### Using with `Map`
+
+```js
+
+const map = new Map();
+map.set(window, 'win');
+map.set(document, 'doc');
+
+Array.from(map); // => [[window, 'win'], [document, 'doc']]
+
+```
+---
+
+
+#`Array.from`
+
+### Using with `Set`
+
+```js
+
+const set = new Set();
+set.add(1);
+set.add(2);
+
+Array.from(set); // => [1, 2];
+
+Array.from(set).reduce(/*...*/);
+
+```
+---
+
+#`Array.from`
+
+### Using with `String`
+
+```js
+
+Array.from('1 2 3 4').filter(Number).map(Number) // => [1, 2, 3, 4]
+
+```
+
+```js
+'Yes! 👍'.split('') // =>  ["Y", "e", "s", "!", " ", "�", "�"]
+
+Array.from('Yes! 👍') // =>  [ "Y", "e", "s", "!", " ", "👍" ]
+```
+
+---
+
+#`Array.from`
+
+### Using with DOM elements
+
+```js
+
+Array.from(document.querySelectorAll('input[type="checkbox"]'))
+
+    .filter(el => el.checked)
+```
+
+```js
+myElement.addEventListener('click', event => {
+
+    Array.from(event.target.childNodes).forEach(child => {
+
+        child.classList.toggle('active');
+    });
+})
+```
+---
+
+#`Array.prototype.from`
+### Polyfill<span style="color: green">✔</span>
+[`polyfill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill)
+
+### Browsers
+  * Firefox 32
+
+---
+
+#`Array.prototype.NAME`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  *
+
+---
+#`Array.prototype.NAME`
+
+```js
+
+```
+---
+
+#`Array.prototype.NAME`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  *
+
+---
+
+#`Array.prototype.NAME`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  *
+
+---
+#`Array.prototype.NAME`
+
+```js
+
+```
+---
+
+#`Array.prototype.NAME`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  *
+
+---
+
+#`Array.prototype.NAME`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  *
+
+---
+#`Array.prototype.NAME`
+
+```js
+
+```
+---
+
+#`Array.prototype.NAME`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  *
+
+
+---
 
 #`Object`
 ### ES5
