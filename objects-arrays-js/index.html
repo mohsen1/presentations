@@ -644,7 +644,6 @@ while (nextVal = arrIterator.next().value) {
 * `Object.defineProperty` and `Object.defineProperties`
 * `Object.keys`
 * `Object.preventExtensions`
-* `Object.prototype.propertyIsEnumerable`
 * `Object.seal` and `Object.freeze`
 
 ### ES6
@@ -807,6 +806,94 @@ Object.defineProperty(o, 'a', {
 // => TypeError: Invalid property.  A property cannot both have accessors and be writable or have a value
 ```
 ---
+
+# `Object.defineProperty` and `Object.defineProperties`
+
+### Browsers
+  * IE9 and partially IE8
+---
+
+# `Object.preventExtensions`
+
+> The `Object.preventExtensions()` method prevents new properties from ever being added to an object
+
+```js
+
+var obj = {a: 1};
+Object.preventExtensions(obj);
+
+
+obj.b = 2 // silently ignores it
+
+obj.b // => undefined
+
+```
+---
+
+# `Object.preventExtensions`
+
+```js
+function Person(name, location) {
+    this.name = name;
+    this.location = location;
+    Object.preventExtensions(this);
+}
+
+var p = new Person('Mohsen', 'San Jose');
+
+p.age = 98;
+
+p.age // => undefined
+```
+---
+
+# `Object.preventExtensions`
+
+### Browsers
+  * IE9
+
+---
+
+# `Object.seal` and `Object.freeze`
+> The `Object.seal()` method seals an object, preventing new properties from being added to it and marking all existing properties as non-configurable. Values of present properties can still be changed as long as they are writable.
+
+> The `Object.freeze()` method freezes an object: that is, prevents new properties from being added to it; prevents existing properties from being removed; and prevents existing properties, or their enumerability, configurability, or writability, from being changed. In essence the object is made effectively immutable. The method returns the object being frozen.
+
+---
+# `Object.seal` and `Object.freeze`
+
+```js
+var obj = {a: 1};
+
+Object.sea(obj);
+
+delete obj.a; // won't work
+
+obj.b = 2;    // won't work
+
+obj.a = 10;   // works
+```
+
+---
+# `Object.seal` and `Object.freeze`
+
+```js
+var obj = {a: 1};
+
+Object.freeze(obj);
+
+delete obj.a; // won't work
+
+obj.b = 2;    // won't work
+
+obj.a = 10;   // won't work
+```
+
+---
+# `Object.seal` and `Object.freeze`
+
+### Browsers
+  * IE9
 
 
 
