@@ -54,8 +54,6 @@ class: center, middle
   * `Array.prototype.find`
   * `Array.prototype.entries`
   * `Array.prototype.keys`
-  * `Array.prototype.from`
-
 ---
 
 # `Array.isArray`
@@ -587,7 +585,7 @@ for (let pair of arr.entries()) {
 
 
 ```js
-for (let pair of theArray) {
+for (let pair of theArray.entries()) {
 
     if (pair[0] % 197 === 0) {
 
@@ -598,6 +596,39 @@ for (let pair of theArray) {
 ---
 
 #`Array.prototype.entries`
+### Polyfill<span style="color: green">✔</span>
+
+
+### Browsers
+  * Firefox 28
+  * Chrome 38
+
+---
+#`Array.prototype.keys`
+
+> The `keys()` method returns a new Array Iterator that contains the keys for each index in the array.
+
+```js
+const arr = [1, 2, 3];
+
+const arrIterator = arr.keys();
+
+let nextVal
+
+while (nextVal = arrIterator.next().value) {
+ console.log(nextVal);
+}
+
+```
+
+```js
+1
+2
+3
+```
+---
+
+#`Array.prototype.keys`
 ### Polyfill<span style="color: green">✔</span>
 
 
