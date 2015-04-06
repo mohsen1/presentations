@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>My Experience in Building Swagger Editor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -17,17 +17,16 @@
     </style>
   </head>
   <body>
+  <!-- AST
+  Error Reporter
+  Left to right nav
+  code completion -->
 <textarea id="source">
 
 
 class: center, middle
 
-# My experience building [Swagger Editor](http://editor.swagger.io)
-
-  AST
-  Error Reporter
-  Left to right nav
-  code completion
+# My Experience in Building [Swagger Editor](http://editor.swagger.io)
 
 ---
 
@@ -41,12 +40,75 @@ class: center, middle
 * Twitter: [`@mohsen____`](https://twitter.com/mohsen____)
 * Website: [`azimi.me`](http://azimi.me)
 
-
 ---
 
 class: center, middle
 
 # What is Swagger?
+
+---
+
+![Define Swagger](images/define-swagger.png)
+
+---
+
+# Swagger API
+* ### API specification format
+
+---
+
+# Swagger API
+* ### API specification format
+* ### Tools for generating documentation (Swagger UI)
+
+---
+
+# Swagger API
+* ### API specification format
+* ### Tools for generating documentation (Swagger UI)
+* ### Tools for generating API spec from the code (Swagger Core)
+
+---
+
+# Swagger API
+* ### API specification format
+* ### Tools for generating documentation (Swagger UI)
+* ### Tools for generating API spec from the code (Swagger Core)
+* ### Tools for consuming APIs in client side (SwaggerJS)
+---
+
+# Swagger API
+* ### API specification format
+* ### Tools for generating documentation (Swagger UI)
+* ### Tools for generating API spec from the code (Swagger Core)
+* ### Tools for consuming APIs in client side (SwaggerJS)
+* ### Tools for generating server and client code from the specs
+---
+
+# Swagger API
+* ### API specification format
+* ### Tools for generating documentation (Swagger UI)
+* ### Tools for generating API spec from the code (Swagger Core)
+* ### Tools for consuming APIs in client side (SwaggerJS)
+* ### Tools for generating server and client code from the specs
+* ### A lot of [community-driven projects](https://github.com/swagger-api/swagger-spec#additional-libraries)
+
+---
+
+# Specs first or code first?
+
+---
+
+# Specs first or code first?
+
+<div class="center">
+  <h1 style="font-size: 300px; margin: 0">Both!</h1>
+</div>
+
+---
+
+class: center, middle
+# Show me the code
 
 ---
   # Swagger 1.2
@@ -73,14 +135,33 @@ swaggerVersion: "1.2",
 ---
 class: center, middle
 
-#Swagger 2.0
+# Swagger 2.0
+
 ---
-#YAML
+
+# Swagger 2.0
+* #### Single file for specification
+* #### Tree view of the API
+* #### More JSON Schema
+* #### Introduction of JSON References
+* #### Makrdown in descriptions
+* #### A JSON Hyper-Schema for validating Swagger 2.0 specs
+* #### Fixes many issues raised by the community
+* #### YAML as first-class citizen
+
+---
+
+class: center, middle
+# Show me the code
+
+---
+
+#YAML for human
   ```yaml
 swagger: '2.0'
 info:
-  version: 0.0.0
-  title: Simple API
+  version: 1.0.0
+  title: A simple API
 paths:
   /:
     get:
@@ -89,36 +170,128 @@ paths:
           description: OK
 
   ```
+---
+# JSON for machine
+
+```json
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "A simple API"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 ---
 
-#Lnaguage independent with lots of ready to use tools
-
-* NNN Tools submitted
-* NN Lnaguages
-
-
----
-# Specs first or code first?
- ![img](http://img.pandawhale.com/82733-why-not-both-meme-5LvD.jpeg)
-
-
----
 class: center, middle
 
-# What did we have for Swagger tooling?
-
+# How should you make an API?
+<h1>&nbsp;</h1>
 ---
 
 class: center, middle
 
-# What were the limitation of Swagger tooling?
-
----
-#
-
+# How should you make ~~an API~~ <span style="color: red">anything</span>?
+<h1>&nbsp;</h1>
 ---
 
+class: center, middle
+
+# How should you make ~~an API~~ <span style="color: red">anything</span>?
+<h1>Design it first!</h1>
+
+---
+# Design First API Development
+
+---
+# Design First API Development
+
+* ### Fast feedback loop
+
+---
+# Design First API Development
+
+* ### Fast feedback loop
+* ### Well structured API
+
+---
+
+# Design First API Development
+
+* ### Fast feedback loop
+* ### Well structured API
+* ### Collaborative development
+
+---
+
+# Design First API Development
+
+* ### Fast feedback loop
+* ### Well structured API
+* ### Collaborative development
+* ### Well documented API
+
+---
+
+# Design First API Development
+
+* ### Fast feedback loop
+* ### Well structured API
+* ### Collaborative development
+* ### Well documented API
+* ### Testable API
+
+---
+
+# The case for Swagger Editor
+
+---
+
+# The case for Swagger Editor
+
+* #### There was no tool for authoring Swagger specs with fast feedback loop
+
+---
+
+# The case for Swagger Editor
+
+* #### There was no tool for authoring Swagger specs with fast feedback loop
+* #### Nobody have all the Swagger specs on top of their head to write an accurate specs *
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+
+<span style="font-size: 12px;">\* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)</span>
+---
+# The case for Swagger Editor
+
+* #### There was no tool for authoring Swagger specs with fast feedback loop
+* #### Nobody have all the Swagger specs on top of their head to write an accurate specs *
+* #### Other API specifications had authoring tools
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+#### &nbsp;
+
+<span style="font-size: 12px;">\* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)</span>
+---
 
 class: center, middle
 
