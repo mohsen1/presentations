@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+<textarea id="source">
+
+
+class: center, middle
+
+# My experience building [Swagger Editor](http://editor.swagger.io)
+
+  AST
+  Error Reporter
+  Left to right nav
+  code completion
+
+---
+
+# About Me
+
+<img width="100px" src="https://avatars2.githubusercontent.com/u/543633?v=3&s=460">
+### Mohsen Azimi
+#### Software Engineer @Apigee
+
+* Github: [`@mohsen1`](https://github.com/mohsen1)
+* Twitter: [`@mohsen____`](https://twitter.com/mohsen____)
+* Website: [`azimi.me`](http://azimi.me)
+
+
+---
+
+class: center, middle
+
+# What is Swagger?
+
+---
+  # Swagger 1.2
+  [http://petstore.swagger.io/api/api-docs](http://petstore.swagger.io/api/api-docs)
+  ```json
+apiVersion: "1.0.0",
+swaggerVersion: "1.2",
+  apis: [
+    {
+      path: "/pet",
+      description: "Operations about pets"
+    },
+    {
+      path: "/user",
+      description: "Operations about user"
+    },
+    {
+      path: "/store",
+      description: "Operations about store"
+    }
+  ],
+  authorizations: { ....
+  ```
+---
+class: center, middle
+
+#Swagger 2.0
+---
+#YAML
+  ```yaml
+swagger: '2.0'
+info:
+  version: 0.0.0
+  title: Simple API
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: OK
+
+  ```
+
+---
+
+#Lnaguage independent with lots of ready to use tools
+
+* NNN Tools submitted
+* NN Lnaguages
+
+
+---
+# Specs first or code first?
+ ![img](http://img.pandawhale.com/82733-why-not-both-meme-5LvD.jpeg)
+
+
+---
+class: center, middle
+
+# What did we have for Swagger tooling?
+
+---
+
+class: center, middle
+
+# What were the limitation of Swagger tooling?
+
+---
+#
+
+---
+
+
+class: center, middle
+
+# Starting the project and making choices
+
+---
+
+class: center, middle
+
+<img height="400px" src="http://yeoman.io/assets/img/yeoman-003.6c51.png">
+# Started with Yoeman
+
+---
+class: center, middle
+
+<img src=http://www.w3schools.com/angular/pic_angular.jpg>
+
+#AngularJS
+
+---
+
+class: center, middle
+
+<img width="200" src="http://swagger.io/images/swaggerLogo360.png">
+#SwaggerUI for rendering
+
+---
+
+class: center, middle
+
+<img src="https://d1n0x3qji82z53.cloudfront.net/ace-logo.png">
+
+#Ace for code editor
+
+---
+class: center, middle
+<img height="200" src="https://i.cloudup.com/bDkmXyEmr5.png">
+# Grunt for build tools
+---
+class: center, middle
+<img src="https://www.opencpu.org/images/jshint.png">
+#JSHint
+---
+class: center, middle
+<img src="https://avatars2.githubusercontent.com/u/8018201?v=3&s=200">
+#JSCS
+---
+
+class: center, middle
+<img height="200" src="https://www.cloudamqp.com/images/blog/github.png">
+#Github for hosting the code and tracking issues
+---
+class: center, middle
+#Breaking it down
+<img height="500" src="https://blog.apigee.com/sites/blog/files/Screen%20Shot%202014-10-22%20at%209.09.11%20AM.png">
+
+---
+
+---
+</textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
