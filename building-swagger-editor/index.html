@@ -4,16 +4,15 @@
     <title>My Experience in Building Swagger Editor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Istok+Web);
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700,400italic);
 
       body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
+      h1, h2, h3, h4 {
+        font-family: 'Istok Web';
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code, code { font-family: 'Source Code Pro'; }
     </style>
   </head>
   <body>
@@ -28,6 +27,9 @@ class: center, middle
 
 # My Experience in Building [Swagger Editor](http://editor.swagger.io)
 
+# &nbsp;
+
+Use arrow keys to navigate →
 ---
 
 # About Me
@@ -53,45 +55,45 @@ class: center, middle
 ---
 
 # Swagger API
-* ### API specification format
+* #### API specification format
 
 ---
 
 # Swagger API
-* ### API specification format
-* ### Tools for generating documentation (Swagger UI)
+* #### API specification format
+* #### Tools for generating documentation (Swagger UI)
 
 ---
 
 # Swagger API
-* ### API specification format
-* ### Tools for generating documentation (Swagger UI)
-* ### Tools for generating API spec from the code (Swagger Core)
+* #### API specification format
+* #### Tools for generating documentation (Swagger UI)
+* #### Tools for generating API spec from the code (Swagger Core)
 
 ---
 
 # Swagger API
-* ### API specification format
-* ### Tools for generating documentation (Swagger UI)
-* ### Tools for generating API spec from the code (Swagger Core)
-* ### Tools for consuming APIs in client side (SwaggerJS)
+* #### API specification format
+* #### Tools for generating documentation (Swagger UI)
+* #### Tools for generating API spec from the code (Swagger Core)
+* #### Tools for consuming APIs in client side (SwaggerJS)
 ---
 
 # Swagger API
-* ### API specification format
-* ### Tools for generating documentation (Swagger UI)
-* ### Tools for generating API spec from the code (Swagger Core)
-* ### Tools for consuming APIs in client side (SwaggerJS)
-* ### Tools for generating server and client code from the specs
+* #### API specification format
+* #### Tools for generating documentation (Swagger UI)
+* #### Tools for generating API spec from the code (Swagger Core)
+* #### Tools for consuming APIs in client side (SwaggerJS)
+* #### Tools for generating server and client code from the specs
 ---
 
 # Swagger API
-* ### API specification format
-* ### Tools for generating documentation (Swagger UI)
-* ### Tools for generating API spec from the code (Swagger Core)
-* ### Tools for consuming APIs in client side (SwaggerJS)
-* ### Tools for generating server and client code from the specs
-* ### A lot of [community-driven projects](https://github.com/swagger-api/swagger-spec#additional-libraries)
+* #### API specification format
+* #### Tools for generating documentation (Swagger UI)
+* #### Tools for generating API spec from the code (Swagger Core)
+* #### Tools for consuming APIs in client side (SwaggerJS)
+* #### Tools for generating server and client code from the specs
+* #### A lot of [community-driven projects](https://github.com/swagger-api/swagger-spec#additional-libraries)
 
 ---
 
@@ -111,8 +113,9 @@ class: center, middle
 # Show me the code
 
 ---
-  # Swagger 1.2
-  [http://petstore.swagger.io/api/api-docs](http://petstore.swagger.io/api/api-docs)
+
+# Swagger 1.2
+[http://petstore.swagger.io/api/api-docs](http://petstore.swagger.io/api/api-docs)
   ```json
 apiVersion: "1.0.0",
 swaggerVersion: "1.2",
@@ -132,6 +135,37 @@ swaggerVersion: "1.2",
   ],
   authorizations: { ....
   ```
+
+---
+##### <code>pet.json</code>
+
+```json
+{
+  "resourcePath": "/pet",
+  "apis": [
+    {
+      "path": "/pet/findByTags",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Finds Pets by tags",
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid tag value"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/pet/{petId}",
+      "operations": [
+        {
+          "method": "PATCH",
+          ...
+```
+
 ---
 class: center, middle
 
@@ -243,19 +277,19 @@ paths:
 
 class: center, middle
 
-# How should you make an API?
+### How should you make an API?
 <h1>&nbsp;</h1>
 ---
 
 class: center, middle
 
-# How should you make ~~an API~~ <span style="color: red">anything</span>?
+### How should you make ~~an API~~ <span style="color: red">anything</span>?
 <h1>&nbsp;</h1>
 ---
 
 class: center, middle
 
-# How should you make ~~an API~~ <span style="color: red">anything</span>?
+### How should you make ~~an API~~ <span style="color: red">anything</span>?
 <h1>Design it first!</h1>
 
 ---
@@ -303,7 +337,7 @@ class: center, middle
 
 class: center, middle
 
-# Good design is only possible with good tools
+### Good design is only possible with good tools
 
 ![Design Tools](images/design_tools.jpg)
 
@@ -315,35 +349,27 @@ class: center, middle
 
 # The case for Swagger Editor
 
-* #### There was no tool for authoring Swagger specs with fast feedback loop
+* ### There was no tool for authoring Swagger specs with fast feedback loop
 
 ---
 
 # The case for Swagger Editor
 
-* #### There was no tool for authoring Swagger specs with fast feedback loop
-* #### Nobody have all the Swagger specs on top of their head to write an accurate specs *
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
+* ### There was no tool for authoring Swagger specs with fast feedback loop
+* ### Nobody have all the Swagger specs on top of their head to write an accurate specs *
+### &nbsp;
 
-<span style="font-size: 12px;">\* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)</span>
+
+\* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)
 ---
 # The case for Swagger Editor
 
-* #### There was no tool for authoring Swagger specs with fast feedback loop
-* #### Nobody have all the Swagger specs on top of their head to write an accurate specs *
-* #### Other API specifications had authoring tools
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
-#### &nbsp;
+* ### There was no tool for authoring Swagger specs with fast feedback loop
+* ### Nobody have all the Swagger specs on top of their head to write an accurate specs *
+* ### Other API specifications had authoring tools
 
-<span style="font-size: 12px;">\* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)</span>
+
+\* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)
 ---
 
 class: center, middle
@@ -418,7 +444,7 @@ class: center, middle
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({navigation: {scroll: false}});
     </script>
   </body>
 </html>
