@@ -667,7 +667,7 @@ foo:
 
 ---
 
-### To sort properties based on their position in the YAML we need ab abstract syntax tree (AST) of the YAML
+### To sort properties based on their position in the YAML we need an abstract syntax tree (AST) of the YAML
 
 ---
 
@@ -737,6 +737,113 @@ value:
   ]
 }
 ```
+
+---
+
+# AST can do much more
+
+* ### Points to exactly where an error occurred (Jump to line)
+
+---
+
+
+# AST can do much more
+
+* ### Points to exactly where an error occurred (Jump to line)
+* ### Points to exactly where a path, operation or parameter is located in code (Jump to YAML)
+
+---
+
+
+# AST can do much more
+
+* ### Points to exactly where an error occurred (Jump to line)
+* ### Points to exactly where a path, operation or parameter is located in code (Jump to YAML)
+* ### Brings into the view the operation that is being edited currently
+
+---
+
+## Jump to line link when there is a YAML syntax error
+<img src="images/error-line.png" width="100%">
+
+---
+
+# From YAML syntax error to line number
+
+YAML syntax error gives back the line number and column number
+
+```json
+problem_mark:
+  buffer: "swagger: '2.0'↵info:↵ version: 1.0.0↵   title: '..."
+  column: 8
+  line: 3
+  pointer: 46
+```
+---
+
+class: center, middle
+
+# Easy!
+
+---
+
+# Jump to line link when there is an error in Swagger spec
+
+<img src="images/swagger-error.png" alt="" width="100%">
+
+---
+
+# Swagger errors are JSON Schema errors
+
+### JSON Schema errors have:
+#### Line number in JSON
+#### JSON path to error
+
+---
+
+class: center, middle
+
+# Line number in JSON is useless!
+
+---
+
+### Getting the line number from a JSON path
+
+<img src="images/ast-walker.png" alt="" width="100%">
+
+
+---
+
+# AST walker
+
+* ### In-order tree walking
+
+---
+
+# AST walker
+
+* ### In-order tree walking
+* ### Very cheap operation
+
+---
+
+# AST walker
+
+* ### In-order tree walking
+* ### Very cheap operation
+* ### We need to update the AST when spec changes
+
+---
+
+# Jumpt to YAML
+
+
+
+
+
+
+
+
 
 ---
 
