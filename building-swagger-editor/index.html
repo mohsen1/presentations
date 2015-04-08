@@ -13,6 +13,20 @@
         font-family: 'Istok Web';
       }
       .remark-code, .remark-inline-code, code { font-family: 'Source Code Pro'; }
+
+      table.lean th {
+        width: 50%;
+        vertical-align: top;
+        padding: 1.2em .2em;
+        line-height: 1.1;
+        text-align: left;
+        font-family: sans-serif;
+        font-weight: normal;
+        margin: 0;
+      }
+      table.lean tr:nth-child(odd) {
+        background: #F2F2F2;
+      }
     </style>
   </head>
   <body>
@@ -343,17 +357,17 @@ class: center, middle
 
 ---
 
-# The case for Swagger Editor
+# The case for an editor
 
 ---
 
-# The case for Swagger Editor
+# The case for an editor
 
 * ### There was no tool for authoring Swagger specs with fast feedback loop
 
 ---
 
-# The case for Swagger Editor
+# The case for an editor
 
 * ### There was no tool for authoring Swagger specs with fast feedback loop
 * ### Nobody have all the Swagger specs on top of their head to write an accurate specs *
@@ -362,7 +376,7 @@ class: center, middle
 
 \* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)
 ---
-# The case for Swagger Editor
+# The case for an editor
 
 * ### There was no tool for authoring Swagger specs with fast feedback loop
 * ### Nobody have all the Swagger specs on top of their head to write an accurate specs *
@@ -370,6 +384,39 @@ class: center, middle
 
 
 \* Not even [@webron](https://github.com/webron) or [@fehguy](https://github.com/fehguy)
+
+---
+
+# Swagger Editor
+
+<table class="lean" cellspacing="0">
+  <tbody>
+    <tr>
+      <th>A tool to enable design-first API development</th>
+      <th>Live documentations preview</th>
+    </tr>
+    <tr>
+      <th>Semantic and Schema error reporter</th>
+      <th>Syntactic error reporter</th>
+    </tr>
+    <tr>
+      <th>Code storage (local storage or a backend)</th>
+      <th>Import/Export Swagger specs in YAML and JSON</th>
+    </tr>
+    <tr>
+      <th>Can be hooked to a backend</th>
+      <th>Try operation</th>
+    </tr>
+    <tr>
+      <th>Documentation/Code fold sync</th>
+      <th>Code navigation</th>
+    </tr>
+    <tr>
+      <th>Authentication support</th>
+      <th>Tag navigation</th>
+    </tr>
+  </tbody>
+</table>
 ---
 
 class: center, middle
@@ -402,7 +449,7 @@ class: center, middle
 class: center, middle
 
 <img width="200" src="images/swagger.png">
-#SwaggerUI for rendering
+#SwaggerUI for rendering (Initially)
 
 ---
 
@@ -429,10 +476,267 @@ class: center, middle
 class: center, middle
 <img height="200" src="images/github.png">
 #Github for hosting the code and tracking issues
+
 ---
+
+# Editor workflow
+
+<img width="100%" src="images/code-compile-render.png">
+
+---
+# Editor workflow
+
+<img width="100%" src="images/code-compile-render.png">
+<img width="100%" src="images/read-yaml-.png">
+
+---
+
 class: center, middle
-#Breaking it down
-<img height="500" src="https://blog.apigee.com/sites/blog/files/Screen%20Shot%202014-10-22%20at%209.09.11%20AM.png">
+
+# Easy!
+
+---
+
+class: center, middle
+# Spec changes on every keypress
+---
+
+class: center, middle
+# Spec can be invalid
+
+---
+
+class: center, middle
+## User wants to know if their spec is invalid
+
+---
+
+class: center, middle
+## User wants to see errors in the specs
+
+---
+
+# Challenges
+
+* ### Render fast
+* ### Keep typing smooth
+* ### Report errors
+
+---
+
+# Challenges
+
+* ### Render fast
+* ### Keep typing smooth
+* ### Report errors
+
+---
+
+# Rendering Fast
+
+* ### Rendering is not fast! Specially if spec is large.
+
+---
+
+# Rendering Fast
+
+* ### Rendering is not fast! Specially if spec is large.
+* ### Throttling the render task is reasonable.
+
+---
+
+# Rendering Fast
+
+* ### Rendering is not fast! Specially if spec is large.
+* ### Throttling the render task is reasonable.
+* ### AngularJS do not re-render entire HTML when scope changes partially, don't override the scope on each keypress
+
+---
+
+# Keeping typing experience smooth
+
+* ### Throttling rendering task helps not blocking the UI while typing
+---
+
+# Keeping typing experience smooth
+
+* ### Throttling rendering task helps not blocking the UI while typing
+* ### Parsing YAML and walking the spec tree for validation is expensive, let's throttle those too
+---
+
+class: center, middle
+
+### A lot of tasks should run when user stops changing the spec (Error checking, rendering and saving)
+### Each task can fail in it's own way
+
+---
+
+class: center, middle
+
+# Pub-Sub
+#### Publish–subscribe pattern
+
+---
+
+# Pub-Sub
+
+---
+
+# Pub-Sub
+* ### Each task(component) can emit an error
+
+---
+
+# Pub-Sub
+* ### Each task(component) can emit an error
+* ### Error reporter will show errors to user no matter which component they are coming from
+
+---
+# Pub-Sub
+* ### Each task(component) can emit an error
+* ### Error reporter will show errors to user no matter which component they are coming from
+* ### One component keeps the state of all tasks success
+
+---
+
+# Change listening and change listeners
+
+```js
+Storage.addChangeListener('yaml', update);
+```
+
+```js
+this.addChangeListener = function (key, fn) {
+  if (angular.isFunction(fn)) {
+    if (!changeListeners[key]) {
+      changeListeners[key] = [];
+    }
+    changeListeners[key].push(fn);
+  }
+};
+```
+[see this in Github](https://github.com/swagger-api/swagger-editor/blob/master/app%2Fscripts%2Fservices%2Flocal-storage.js#L46-L53)
+
+---
+
+<img src="images/pub-sub.png" alt="" width="100%">
+---
+
+# Challenges revisited
+
+* ### Render fast  <span style="color: green">✔</span>
+* ### Keep typing smooth  <span style="color: green">✔</span>
+* ### Report errors  <span style="color: green">✔</span>
+
+---
+
+# A new problem
+
+<img src="images/wrong_order.png" alt="Wrong order" width="100%">
+
+---
+
+# A new problem
+## JSON does not care about property <b>order</b>, therefore Swagger operation and responses may lose their order during YAML→JSON conversion
+
+
+---
+
+class: center, middle
+
+# We need to sort object properties based on their position in YAML
+
+
+---
+
+# Some processors sort keys alphabetically
+```yml
+foo:
+  jaz: 2
+  bar: 1
+```
+
+```json
+{
+  "foo": {
+    "bar": 1,
+    "jaz": 2
+  }
+}
+```
+
+---
+
+### To sort properties based on their position in the YAML we need ab abstract syntax tree (AST) of the YAML
+
+---
+
+#### What is an AST?
+
+<img src="images/ast.png" alt="AST" width="100%">
+
+---
+
+```yml
+foo:
+  jaz: 2
+  bar: 1
+```
+
+```yaml
+value:
+      value: "foo"
+      start_mark:
+        line: 0
+        column: 0
+      end_mark:
+        line: 0
+        column: 3
+      value:
+            value: "jaz"
+            start_mark:
+              line: 1
+              column: 2
+            end_mark:
+              line: 1
+              column: 5
+            value: "2"
+            start_mark:
+              line: 1
+              column: 7
+            end_mark:
+             ....
+
+```
+
+---
+### Using an array instead of objects to keep the order
+
+```yaml
+/:
+ get: ...
+ post: ...
+```
+
+```js
+{
+  "post": { /* ... */ },
+  "get": { /* ... */ }
+}
+```
+
+```js
+{
+  "operations": [
+    {
+      "operationsName": "get", /* ... */
+    },
+    {
+      "operationsName": "post", /* ... */
+    }
+  ]
+}
+```
 
 ---
 
