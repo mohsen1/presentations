@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Working with `Array`s and `Object`s in modern JavaScript</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+  </head>
+  <body>
+<textarea id="source">
+
+class: center, middle
+
+# An Overview of `Map` and `Set` in JavaScript
+
+---
+
+# About Me
+
+<img width="100px" src="https://avatars2.githubusercontent.com/u/543633?v=3&s=460">
+### Mohsen Azimi
+#### Software Engineer @Apigee
+
+* Github: [`@mohsen1`](https://github.com/mohsen1)
+* Twitter: [`@mohsen____`](https://twitter.com/mohsen____)
+* Website: [`azimi.me`](http://azimi.me)
+
+---
+
+# `Set`
+
+A set of values with **no repetition**.
+
+---
+
+# `Set`
+
+### Making a `Set` object
+
+```js
+let s = new Set();
+
+s.add('London');
+s.add('Los Angeles');
+s.add('San Francisco');
+
+s.add('London'); // silently ignores it
+
+s.size; // => 3
+```
+
+---
+
+# `Set`
+
+### Use case
+
+```js
+var cities = [
+  { country: 'USA',    name: 'San Francisco' },
+  { country: 'Canada', name: 'Toronto' },
+  { country: 'France', name: 'Paris' },
+  { country: 'USA',    name: 'New York' }
+];
+```
+
+```js
+
+var countries = {};
+
+cities.forEach(function (city) {
+
+  // value is not important, we want fast lookups
+  countries[city.country] = true;
+
+});
+
+console.log('Countries are', Object.keys(countries).join(', '));
+
+```
+
+---
+
+# `Set`
+
+### Use case
+
+```js
+var cities = [
+  { country: 'USA',    name: 'San Francisco' },
+  { country: 'Canada', name: 'Toronto' },
+  { country: 'France', name: 'Paris' },
+  { country: 'USA',    name: 'New York' }
+];
+```
+
+```js
+
+const countries = new Set();
+
+cities.forEach( (city) => countries.add(city.country) );
+
+console.log('Countries are', Array.from(countries).join(', '));
+
+```
+---
+
+# `Set`
+
+### Use case
+
+```js
+var cities = [
+  { country: 'USA',    name: 'San Francisco' },
+  { country: 'Canada', name: 'Toronto' },
+  { country: 'France', name: 'Paris' },
+  { country: 'USA',    name: 'New York' }
+];
+```
+
+```js
+
+// Lets go fancy!
+const countries = new Set(cities.map((city) => city.country));
+
+console.log('Countries are', Array.from(countries).join(', '));
+
+```
+
+---
+# `Set`
+
+### Use case
+
+```js
+function Country(name) {
+  this.name = name;
+}
+
+var USA = new Country('USA');
+var Canada = new Country('Canada');
+var France = new Country('France');
+
+var cities = [{ country: USA,    name: 'San Francisco' },
+              { country: Canada, name: 'Toronto' },
+              { country: France, name: 'Paris' },
+              { country: USA,    name: 'New York' }];
+
+var countries = {};
+
+cities.forEach(function (city) {
+
+  // city.country.toString() => [object Object]
+  countries[city.country] = true;
+});
+
+```
+---
+# `Set`
+
+### Use case
+
+```js
+class Country {
+  constructor(name) { this.name = name; }
+}
+
+const USA = new Country('USA');
+const Canada = new Country('Canada');
+const France = new Country('France');
+
+const cities = [{ country: USA,  name: 'San Francisco' },
+                { country: Canada, name: 'Toronto' },
+                { country: France, name: 'Paris' },
+                { country: USA,    name: 'New York' }];
+
+const countries = new Set(cities.map((city) => city.country));
+
+```
+
+
+</textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}});
+    </script>
+  </body>
+</html>
