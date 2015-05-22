@@ -61,6 +61,73 @@ s.size; // => 3
 ```
 
 ---
+# `Set`
+
+### Comparison rules
+
+```js
+let s = new Set([1, '1']);
+
+s.size; // => 2
+
+s.has(1); // => true
+
+s.has('1'); // => true
+
+```
+---
+# `Set`
+
+### Comparison rules
+
+```js
+let o1 = {};
+let o2 = {};
+
+let s = new Set();
+
+s.add(o1);
+s.add(o2);
+
+s.size;   // => 2
+
+s.has(o1) // => true
+s.has(o2) // => true
+
+s.has({}) // => false
+```
+---
+
+# `Set`
+
+### Use case
+
+```js
+var cities = [
+  { country: 'USA',    name: 'San Francisco' },
+  { country: 'Canada', name: 'Toronto' },
+  { country: 'France', name: 'Paris' },
+  { country: 'USA',    name: 'New York' }
+];
+```
+
+```js
+
+var countries = [];
+
+cities.forEach(function (city) {
+
+  if (countries.indexOf(city.country) === -1) {
+    countries.push(city.country);
+  }
+
+});
+
+console.log('Countries are', countries.join(', '));
+
+```
+
+---
 
 # `Set`
 
@@ -180,7 +247,7 @@ const USA = new Country('USA');
 const Canada = new Country('Canada');
 const France = new Country('France');
 
-const cities = [{ country: USA,  name: 'San Francisco' },
+const cities = [{ country: USA,    name: 'San Francisco' },
                 { country: Canada, name: 'Toronto' },
                 { country: France, name: 'Paris' },
                 { country: USA,    name: 'New York' }];
@@ -188,6 +255,7 @@ const cities = [{ country: USA,  name: 'San Francisco' },
 const countries = new Set(cities.map((city) => city.country));
 
 ```
+---
 
 
 </textarea>
