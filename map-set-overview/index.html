@@ -40,7 +40,7 @@ class: center, middle
 
 # `Set`
 
-A set of values with **no repetition**.
+A set of values with **no repeated value**.
 
 ---
 
@@ -49,7 +49,7 @@ A set of values with **no repetition**.
 ### Making a `Set` object
 
 ```js
-let s = new Set();
+var s = new Set();
 
 s.add('London');
 s.add('Los Angeles');
@@ -66,7 +66,7 @@ s.size; // => 3
 ### Comparison rules
 
 ```js
-let s = new Set([1, '1']);
+var s = new Set([1, '1']);
 
 s.size; // => 2
 
@@ -81,10 +81,10 @@ s.has('1'); // => true
 ### Comparison rules
 
 ```js
-let o1 = {};
-let o2 = {};
+var o1 = {};
+var o2 = {};
 
-let s = new Set();
+var s = new Set();
 
 s.add(o1);
 s.add(o2);
@@ -243,7 +243,7 @@ class Country {
   constructor(name) { this.name = name; }
 }
 
-const USA = new Country('USA');
+const USA    = new Country('USA');
 const Canada = new Country('Canada');
 const France = new Country('France');
 
@@ -252,12 +252,226 @@ const cities = [{ country: USA,    name: 'San Francisco' },
                 { country: France, name: 'Paris' },
                 { country: USA,    name: 'New York' }];
 
-const countries = new Set(cities.map((city) => city.country));
+const countries = new Set( cities.map((city) => city.country) );
 
 ```
+
 ---
 
+# `Map`
 
+A key-value hash that is **not limited to string keys**
+
+---
+
+# `Map`
+
+### Making a `Map` object
+
+```js
+var m = new Map();
+
+m.set('one', 1);
+m.set('two', 2);
+m.set('three', 3);
+
+
+m.has('three'); // => true
+
+m.get('two'); // => 2
+
+m.size; // => 3
+```
+
+---
+
+# `Map`
+
+### Making a `Map` object
+
+```js
+var m = new Map([
+  ['key1', 'value'],
+  ['key2', 'value2']
+]);
+```
+
+---
+
+# `Map`
+
+### Making a `Map` object
+
+```es6
+class Counter {
+
+  *[Symbol.iterator]() {
+
+    for (let i = 1; i <= 10; i++)
+
+      yield [```key ${i}`, i]; // yielding an "entry"
+  }
+}
+
+var s = new Counter();
+
+var map = new Map(s);
+
+console.log(Array.from(map.keys())); // "key 1","key 2","key 3","key 4"...
+```
+
+---
+
+# `Map`
+
+### Use case
+
+```es6
+class Country { constructor(name) { this.name = name; } }
+
+const USA    = new Country('USA');
+const Canada = new Country('Canada');
+const France = new Country('France');
+
+const cities = [{ country: USA,    name: 'San Francisco' },
+                { country: Canada, name: 'Toronto' },
+                { country: France, name: 'Paris' },
+                { country: USA,    name: 'New York' }];
+
+const countries = new Map();
+
+cities.forEach((city)=> {
+
+  if (map.has(city.country)) {
+    map.set(city.country, new Set(city));
+  } else {
+    map.get(city.country).add(city);
+  }
+});
+```
+
+---
+
+# `Map`
+
+### Use case
+
+```js
+var person1 = new Person('Mark');
+var person2 = new Person('Nancy');
+
+var divs = new Map();
+var selectedPeople = [];
+
+divs.set(document.querySelector('.person.one'), person1);
+divs.set(document.querySelector('.person.two'), person2);
+
+document.addEventListener('dragend', function (event) {
+
+  selectedPeople.push(divs.get(event.srcElement));
+
+});
+```
+
+---
+
+# Iterating in `Set` and `Map`
+
+### Iterables
+
+* #### `Set`
+* #### `Map`
+* #### `{Map|Set}#keys()`
+* #### `{Map|Set}#values()`
+* #### `{Map|Set}#entries()`
+
+---
+
+# Iterating in `Set` and `Map`
+
+```es6
+const s = new Set([1, 2, 3])
+
+
+for (let v of s)  {
+
+  console.log(v);
+
+}
+
+// =>
+// 1
+// 2
+// 3
+
+```
+
+---
+
+# Iterating in `Set` and `Map`
+
+```js
+const m = new Map([
+
+  ['alpha', 1],
+  ['beta', 2],
+  ['gamma', 3]
+
+]);
+
+for (let p of m) {
+
+  console.log(p);
+
+}
+
+// =>
+// ["alpha",1]
+// ["beta",2]
+// ["gamma",3]
+```
+---
+# Iterating in `Set` and `Map`
+
+```js
+const m = new Map([
+  ['alpha', 1],
+  ['beta', 2],
+  ['gamma', 3]
+]);
+
+for (let k of m.keys()) {
+  console.log(k); // alpha beta gamma
+}
+
+for (let v of m.values()) {
+  console.log(v); // 1 2 3
+}
+
+for (let p of m.entries()) {
+  console.log(p); // ["alpha",1] ["beta",2] ["gamma",3]
+}
+```
+
+---
+
+# Iterating in `Set` and `Map`
+
+```js
+const s = new Set([1, 2, 3]);
+
+for (let k of s.keys()) {
+  console.log(k); // 1 2 3
+}
+
+for (let v of s.values()) {
+  console.log(v); // 1 2 3
+}
+
+for (let p of s.entries()) {
+  console.log(p); // [1,1] [2,2] [3,3]
+}
+```
 </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
     </script>
