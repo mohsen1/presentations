@@ -539,6 +539,27 @@ Array.from(s); // => [1, 2]
 
 ---
 
+# `WeakMap` and `WeakSet`
+
+* Only objects as keys
+* No strong reference to keys
+* No `size`, `keys` and `entries`
+
+---
+
+# `WeakMap` and `WeakSet`
+
+```es6
+const s = new WeakSet();
+
+const myObject = {value: {me: 1}};
+
+s.add(myObject.value);
+
+delete myObject.value;
+```
+---
+
 class: center, middle
 
 # Thank you!
