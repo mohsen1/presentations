@@ -389,6 +389,8 @@ document.addEventListener('dragend', function (event) {
 
 # Iterating in `Set` and `Map`
 
+### `for..of`
+
 ```es6
 const s = new Set([1, 2, 3])
 
@@ -409,6 +411,8 @@ for (let v of s)  {
 ---
 
 # Iterating in `Set` and `Map`
+
+### `for..of`
 
 ```js
 const m = new Map([
@@ -432,6 +436,8 @@ for (let p of m) {
 ```
 ---
 # Iterating in `Set` and `Map`
+
+### `for..of`
 
 ```js
 const m = new Map([
@@ -457,6 +463,8 @@ for (let p of m.entries()) {
 
 # Iterating in `Set` and `Map`
 
+### `for..of`
+
 ```js
 const s = new Set([1, 2, 3]);
 
@@ -472,6 +480,92 @@ for (let p of s.entries()) {
   console.log(p); // [1,1] [2,2] [3,3]
 }
 ```
+---
+
+# Iterating in `Set` and `Map`
+
+### `forEach`
+
+```es6
+const s = new Set([1, 2, 3]);
+
+s.forEach((value, key, set)=> {
+
+  console.log(value); // 1 2 3
+});
+```
+
+```es6
+const m = new Map([
+  [window, 'Window'],
+  [document, 'Document']
+]);
+
+m.forEach((key, value, map)=> {
+
+  console.log(```${key.toString()}#toString returns ${value}`);
+
+  // Window#toString returns [object Window]
+  // Document#toString returns [object HTMLDocument]
+});
+```
+
+---
+
+# Iterating in `Set` and `Map`
+
+### `Array.from`
+
+```js
+const m = new Map([
+  [window, 'Window'],
+  [document, 'Document']
+]);
+
+Array.from(m); // => [
+//                     [window, 'Window'],
+//                     [document, 'Document']
+//                   ]
+```
+
+```js
+const s = new Set();
+
+s.add(1);
+a.add(2);
+
+Array.from(s); // => [1, 2]
+```
+
+---
+
+# `WeakMap` and `WeakSet`
+
+* Only objects as keys
+* No strong reference to keys
+* No `size`, `keys` and `entries`
+
+---
+
+# `WeakMap` and `WeakSet`
+
+```es6
+const s = new WeakSet();
+
+const myObject = {value: {me: 1}};
+
+s.add(myObject.value);
+
+delete myObject.value;
+```
+---
+
+class: center, middle
+
+# Thank you!
+
+### Questions?
+
 </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
     </script>
